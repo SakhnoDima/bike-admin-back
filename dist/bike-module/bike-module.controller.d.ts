@@ -27,6 +27,7 @@ import { BikeModuleService } from "./bike-module.service";
 import { CreateBikeDto } from "./dto/create-bike-dto";
 import { Response } from "express";
 import { Bike } from "src/schemas/bike-schemas";
+import { UpdateStatusDto } from "./dto/update-status-dto";
 export declare class BikeModuleController {
     private readonly bikeService;
     constructor(bikeService: BikeModuleService);
@@ -35,4 +36,7 @@ export declare class BikeModuleController {
     delete(id: string): Promise<import("mongoose").ModifyResult<import("mongoose").Document<unknown, {}, Bike> & Bike & {
         _id: import("mongoose").Types.ObjectId;
     }>>;
+    update(id: string, updateStatusDto: UpdateStatusDto): Promise<import("mongoose").Document<unknown, {}, Bike> & Bike & {
+        _id: import("mongoose").Types.ObjectId;
+    }>;
 }

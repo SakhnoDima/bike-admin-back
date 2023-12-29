@@ -1,12 +1,12 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { HydratedDocument } from "mongoose";
 
 export type BikeDocument = HydratedDocument<Bike>;
 
-enum Status {
-  AVAILABLE = 'available',
-  BUSY = 'busy',
-  UNAVAILABLE = 'unavailable',
+export enum Status {
+  "available",
+  "busy",
+  "unavailable",
 }
 
 @Schema()
@@ -21,10 +21,10 @@ export class Bike {
   color: string;
 
   @Prop({ required: true })
-  wheelSize: string;
+  wheelSize: number;
 
   @Prop({ required: true })
-  price: string;
+  price: number;
 
   @Prop({ required: true })
   id: string;
@@ -32,8 +32,8 @@ export class Bike {
   @Prop({ required: true })
   description: string;
 
-  @Prop({ type: String, enum: Status, default: Status.AVAILABLE })
-  status: Status;
+  @Prop({ type: String, enum: Status, default: Status[0] })
+  status: string;
 }
 
 export const CatSchema = SchemaFactory.createForClass(Bike);

@@ -17,13 +17,19 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const bike_schemas_1 = require("../schemas/bike-schemas");
+const handleErrors_1 = require("../helpers/handleErrors");
 let BikeModuleService = class BikeModuleService {
     constructor(bikeModel) {
         this.bikeModel = bikeModel;
     }
     async create(createCatDto) {
-        const createBike = await this.bikeModel.create(createCatDto);
-        return createBike;
+        try {
+            const createBike = await this.bikeModel.create(createCatDto);
+            return createBike;
+        }
+        catch (error) {
+            (0, handleErrors_1.HttpErrors)(common_1.HttpStatus.INTERNAL_SERVER_ERROR, "Oops, have some error, try later");
+        }
     }
     async findAll() {
         return await this.bikeModel.find().exec();
@@ -32,7 +38,19 @@ let BikeModuleService = class BikeModuleService {
         const deletedBike = await this.bikeModel
             .findByIdAndDelete({ _id: id })
             .exec();
+        if (!deletedBike) {
+            (0, handleErrors_1.HttpErrors)(common_1.HttpStatus.NOT_FOUND, `Bike with id ${id} not found`);
+        }
         return deletedBike;
+    }
+    async update(id, status) {
+        const bikeForUpdating = await this.bikeModel.findByIdAndUpdate(id, status, {
+            new: true,
+        });
+        if (!bikeForUpdating) {
+            (0, handleErrors_1.HttpErrors)(common_1.HttpStatus.NOT_FOUND, `Bike with id ${id} not found`);
+        }
+        return bikeForUpdating;
     }
 };
 exports.BikeModuleService = BikeModuleService;

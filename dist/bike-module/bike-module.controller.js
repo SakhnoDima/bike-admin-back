@@ -16,6 +16,7 @@ exports.BikeModuleController = void 0;
 const common_1 = require("@nestjs/common");
 const bike_module_service_1 = require("./bike-module.service");
 const create_bike_dto_1 = require("./dto/create-bike-dto");
+const update_status_dto_1 = require("./dto/update-status-dto");
 let BikeModuleController = class BikeModuleController {
     constructor(bikeService) {
         this.bikeService = bikeService;
@@ -29,6 +30,10 @@ let BikeModuleController = class BikeModuleController {
     }
     async delete(id) {
         return this.bikeService.delete(id);
+    }
+    async update(id, updateStatusDto) {
+        console.log(updateStatusDto);
+        return this.bikeService.update(id, updateStatusDto);
     }
 };
 exports.BikeModuleController = BikeModuleController;
@@ -54,6 +59,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], BikeModuleController.prototype, "delete", null);
+__decorate([
+    (0, common_1.Patch)(":id"),
+    __param(0, (0, common_1.Param)("id")),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_status_dto_1.UpdateStatusDto]),
+    __metadata("design:returntype", Promise)
+], BikeModuleController.prototype, "update", null);
 exports.BikeModuleController = BikeModuleController = __decorate([
     (0, common_1.Controller)("bike"),
     __metadata("design:paramtypes", [bike_module_service_1.BikeModuleService])

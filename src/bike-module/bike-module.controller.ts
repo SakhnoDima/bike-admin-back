@@ -6,13 +6,17 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  ParseEnumPipe,
+  Patch,
   Post,
   Res,
+  ValidationPipe,
 } from "@nestjs/common";
 import { BikeModuleService } from "./bike-module.service";
 import { CreateBikeDto } from "./dto/create-bike-dto";
 import { Response } from "express";
-import { Bike } from "src/schemas/bike-schemas";
+import { Bike, Status } from "src/schemas/bike-schemas";
+import { UpdateStatusDto } from "./dto/update-status-dto";
 
 @Controller("bike")
 export class BikeModuleController {
@@ -34,5 +38,15 @@ export class BikeModuleController {
   @Delete(":id")
   async delete(@Param("id") id: string) {
     return this.bikeService.delete(id);
+  }
+
+  @Patch(":id")
+  async update(
+    @Param("id") id: string,
+    @Body() updateStatusDto: UpdateStatusDto
+  ) {
+    console.log(updateStatusDto);
+
+    return this.bikeService.update(id, updateStatusDto);
   }
 }

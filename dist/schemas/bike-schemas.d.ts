@@ -22,26 +22,25 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument } from "mongoose";
 export type BikeDocument = HydratedDocument<Bike>;
-declare enum Status {
-    AVAILABLE = "available",
-    BUSY = "busy",
-    UNAVAILABLE = "unavailable"
+export declare enum Status {
+    "available" = 0,
+    "busy" = 1,
+    "unavailable" = 2
 }
 export declare class Bike {
     name: string;
     type: string;
     color: string;
-    wheelSize: string;
-    price: string;
+    wheelSize: number;
+    price: number;
     id: string;
     description: string;
-    status: Status;
+    status: string;
 }
 export declare const CatSchema: import("mongoose").Schema<Bike, import("mongoose").Model<Bike, any, any, any, import("mongoose").Document<unknown, any, Bike> & Bike & {
     _id: import("mongoose").Types.ObjectId;
 }, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Bike, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<Bike>> & import("mongoose").FlatRecord<Bike> & {
     _id: import("mongoose").Types.ObjectId;
 }>;
-export {};

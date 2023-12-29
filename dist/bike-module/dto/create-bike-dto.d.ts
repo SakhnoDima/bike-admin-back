@@ -2,8 +2,8 @@ export declare class CreateBikeDto {
     readonly name: string;
     readonly type: string;
     readonly color: string;
-    readonly wheelSize: string;
-    readonly price: string;
+    readonly wheelSize: number;
+    readonly price: number;
     readonly id: string;
     readonly description: string;
 }

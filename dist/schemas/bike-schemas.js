@@ -9,14 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CatSchema = exports.Bike = void 0;
+exports.CatSchema = exports.Bike = exports.Status = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 var Status;
 (function (Status) {
-    Status["AVAILABLE"] = "available";
-    Status["BUSY"] = "busy";
-    Status["UNAVAILABLE"] = "unavailable";
-})(Status || (Status = {}));
+    Status[Status["available"] = 0] = "available";
+    Status[Status["busy"] = 1] = "busy";
+    Status[Status["unavailable"] = 2] = "unavailable";
+})(Status || (exports.Status = Status = {}));
 let Bike = class Bike {
 };
 exports.Bike = Bike;
@@ -34,11 +34,11 @@ __decorate([
 ], Bike.prototype, "color", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], Bike.prototype, "wheelSize", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], Bike.prototype, "price", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
@@ -49,7 +49,7 @@ __decorate([
     __metadata("design:type", String)
 ], Bike.prototype, "description", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: String, enum: Status, default: Status.AVAILABLE }),
+    (0, mongoose_1.Prop)({ type: String, enum: Status, default: Status[0] }),
     __metadata("design:type", String)
 ], Bike.prototype, "status", void 0);
 exports.Bike = Bike = __decorate([
