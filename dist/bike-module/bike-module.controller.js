@@ -22,7 +22,13 @@ let BikeModuleController = class BikeModuleController {
     }
     async create(createCatDto, res) {
         await this.bikeService.create(createCatDto);
-        res.json({ message: 'Bike was saved successful' });
+        res.json({ message: "Bike was saved successful" });
+    }
+    async find() {
+        return await this.bikeService.findAll();
+    }
+    async delete(id) {
+        return this.bikeService.delete(id);
     }
 };
 exports.BikeModuleController = BikeModuleController;
@@ -35,8 +41,21 @@ __decorate([
     __metadata("design:paramtypes", [create_bike_dto_1.CreateBikeDto, Object]),
     __metadata("design:returntype", Promise)
 ], BikeModuleController.prototype, "create", null);
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], BikeModuleController.prototype, "find", null);
+__decorate([
+    (0, common_1.Delete)(":id"),
+    __param(0, (0, common_1.Param)("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], BikeModuleController.prototype, "delete", null);
 exports.BikeModuleController = BikeModuleController = __decorate([
-    (0, common_1.Controller)('bike'),
+    (0, common_1.Controller)("bike"),
     __metadata("design:paramtypes", [bike_module_service_1.BikeModuleService])
 ], BikeModuleController);
 //# sourceMappingURL=bike-module.controller.js.map

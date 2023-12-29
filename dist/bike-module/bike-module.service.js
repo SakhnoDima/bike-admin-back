@@ -25,6 +25,15 @@ let BikeModuleService = class BikeModuleService {
         const createBike = await this.bikeModel.create(createCatDto);
         return createBike;
     }
+    async findAll() {
+        return await this.bikeModel.find().exec();
+    }
+    async delete(id) {
+        const deletedBike = await this.bikeModel
+            .findByIdAndDelete({ _id: id })
+            .exec();
+        return deletedBike;
+    }
 };
 exports.BikeModuleService = BikeModuleService;
 exports.BikeModuleService = BikeModuleService = __decorate([

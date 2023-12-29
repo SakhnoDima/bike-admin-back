@@ -22,11 +22,15 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { Model } from 'mongoose';
-import { Bike } from 'src/schemas/bike-schemas';
-import { CreateBikeDto } from './dto/create-bike-dto';
+import { Model } from "mongoose";
+import { Bike } from "src/schemas/bike-schemas";
+import { CreateBikeDto } from "./dto/create-bike-dto";
 export declare class BikeModuleService {
     private readonly bikeModel;
     constructor(bikeModel: Model<Bike>);
     create(createCatDto: CreateBikeDto): Promise<Bike>;
+    findAll(): Promise<Bike[]>;
+    delete(id: string): Promise<import("mongoose").ModifyResult<import("mongoose").Document<unknown, {}, Bike> & Bike & {
+        _id: import("mongoose").Types.ObjectId;
+    }>>;
 }
