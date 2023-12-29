@@ -52,6 +52,19 @@ let BikeModuleService = class BikeModuleService {
         }
         return bikeForUpdating;
     }
+    async getInfo() {
+        const info = await this.bikeModel.aggregate([
+            {
+                $group: {
+                    _id: "$status",
+                    totalBike: { $count: {} },
+                    avgPrice: { $avg: "$price" },
+                },
+            },
+            { $project: { _id: 1, totalBike: 1, avgPrice: 1 } },
+        ]);
+        console.log(info);
+    }
 };
 exports.BikeModuleService = BikeModuleService;
 exports.BikeModuleService = BikeModuleService = __decorate([

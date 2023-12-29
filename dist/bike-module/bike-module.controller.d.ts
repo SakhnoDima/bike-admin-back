@@ -36,7 +36,6 @@ export declare class BikeModuleController {
     delete(id: string): Promise<import("mongoose").ModifyResult<import("mongoose").Document<unknown, {}, Bike> & Bike & {
         _id: import("mongoose").Types.ObjectId;
     }>>;
-    update(id: string, updateStatusDto: UpdateStatusDto): Promise<import("mongoose").Document<unknown, {}, Bike> & Bike & {
-        _id: import("mongoose").Types.ObjectId;
-    }>;
+    update(id: string, updateStatusDto: UpdateStatusDto): Promise<Bike>;
+    getInfo(): Promise<void>;
 }

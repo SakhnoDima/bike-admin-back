@@ -1,7 +1,7 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-import { Bike, Status } from "src/schemas/bike-schemas";
+import { Bike } from "src/schemas/bike-schemas";
 import { CreateBikeDto } from "./dto/create-bike-dto";
 import { HttpErrors } from "src/helpers/handleErrors";
 
@@ -56,5 +56,21 @@ export class BikeModuleService {
     }
 
     return bikeForUpdating;
+  }
+
+  //? get info
+
+  async getInfo() {
+    const info = await this.bikeModel.aggregate([
+      {
+        $group: {
+          _id: "$status",
+          totalBike: { $count: {} },
+          avgPrice: { $avg: "$price" },
+        },
+      },
+      { $project: { _id: 1, totalBike: 1, avgPrice: 1 } },
+    ]);
+    console.log(info);
   }
 }

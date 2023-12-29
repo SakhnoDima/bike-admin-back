@@ -36,4 +36,5 @@ export declare class BikeModuleService {
     update(id: string, status: any): Promise<import("mongoose").Document<unknown, {}, Bike> & Bike & {
         _id: import("mongoose").Types.ObjectId;
     }>;
+    getInfo(): Promise<void>;
 }

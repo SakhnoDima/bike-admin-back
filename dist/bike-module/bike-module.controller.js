@@ -32,8 +32,10 @@ let BikeModuleController = class BikeModuleController {
         return this.bikeService.delete(id);
     }
     async update(id, updateStatusDto) {
-        console.log(updateStatusDto);
         return this.bikeService.update(id, updateStatusDto);
+    }
+    async getInfo() {
+        return await this.bikeService.getInfo();
     }
 };
 exports.BikeModuleController = BikeModuleController;
@@ -67,6 +69,12 @@ __decorate([
     __metadata("design:paramtypes", [String, update_status_dto_1.UpdateStatusDto]),
     __metadata("design:returntype", Promise)
 ], BikeModuleController.prototype, "update", null);
+__decorate([
+    (0, common_1.Get)("/info"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], BikeModuleController.prototype, "getInfo", null);
 exports.BikeModuleController = BikeModuleController = __decorate([
     (0, common_1.Controller)("bike"),
     __metadata("design:paramtypes", [bike_module_service_1.BikeModuleService])

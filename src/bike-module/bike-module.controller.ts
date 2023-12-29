@@ -6,16 +6,14 @@ import {
   HttpCode,
   HttpStatus,
   Param,
-  ParseEnumPipe,
   Patch,
   Post,
   Res,
-  ValidationPipe,
 } from "@nestjs/common";
 import { BikeModuleService } from "./bike-module.service";
 import { CreateBikeDto } from "./dto/create-bike-dto";
 import { Response } from "express";
-import { Bike, Status } from "src/schemas/bike-schemas";
+import { Bike } from "src/schemas/bike-schemas";
 import { UpdateStatusDto } from "./dto/update-status-dto";
 
 @Controller("bike")
@@ -44,9 +42,12 @@ export class BikeModuleController {
   async update(
     @Param("id") id: string,
     @Body() updateStatusDto: UpdateStatusDto
-  ) {
-    console.log(updateStatusDto);
-
+  ): Promise<Bike> {
     return this.bikeService.update(id, updateStatusDto);
+  }
+
+  @Get("/info")
+  async getInfo(): Promise<void> {
+    return await this.bikeService.getInfo();
   }
 }
