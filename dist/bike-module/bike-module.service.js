@@ -18,6 +18,7 @@ const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const bike_schemas_1 = require("../schemas/bike-schemas");
 const handleErrors_1 = require("../helpers/handleErrors");
+const statisticsCalculator_1 = require("../helpers/statisticsCalculator");
 let BikeModuleService = class BikeModuleService {
     constructor(bikeModel) {
         this.bikeModel = bikeModel;
@@ -63,7 +64,8 @@ let BikeModuleService = class BikeModuleService {
             },
             { $project: { _id: 1, totalBike: 1, avgPrice: 1 } },
         ]);
-        console.log(info);
+        const rez = (0, statisticsCalculator_1.statisticsCalculator)(info);
+        return rez;
     }
 };
 exports.BikeModuleService = BikeModuleService;

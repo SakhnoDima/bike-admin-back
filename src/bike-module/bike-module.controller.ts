@@ -15,6 +15,7 @@ import { CreateBikeDto } from "./dto/create-bike-dto";
 import { Response } from "express";
 import { Bike } from "src/schemas/bike-schemas";
 import { UpdateStatusDto } from "./dto/update-status-dto";
+import { IRez } from "src/helpers/statisticsCalculator";
 
 @Controller("bike")
 export class BikeModuleController {
@@ -47,7 +48,7 @@ export class BikeModuleController {
   }
 
   @Get("/info")
-  async getInfo(): Promise<void> {
+  async getInfo(): Promise<IRez> {
     return await this.bikeService.getInfo();
   }
 }

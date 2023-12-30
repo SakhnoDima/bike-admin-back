@@ -28,6 +28,7 @@ import { CreateBikeDto } from "./dto/create-bike-dto";
 import { Response } from "express";
 import { Bike } from "src/schemas/bike-schemas";
 import { UpdateStatusDto } from "./dto/update-status-dto";
+import { IRez } from "src/helpers/statisticsCalculator";
 export declare class BikeModuleController {
     private readonly bikeService;
     constructor(bikeService: BikeModuleService);
@@ -37,5 +38,5 @@ export declare class BikeModuleController {
         _id: import("mongoose").Types.ObjectId;
     }>>;
     update(id: string, updateStatusDto: UpdateStatusDto): Promise<Bike>;
-    getInfo(): Promise<void>;
+    getInfo(): Promise<IRez>;
 }

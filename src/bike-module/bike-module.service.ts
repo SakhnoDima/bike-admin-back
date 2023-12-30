@@ -4,6 +4,7 @@ import { Model } from "mongoose";
 import { Bike } from "src/schemas/bike-schemas";
 import { CreateBikeDto } from "./dto/create-bike-dto";
 import { HttpErrors } from "src/helpers/handleErrors";
+import { IRez, statisticsCalculator } from "src/helpers/statisticsCalculator";
 
 @Injectable()
 export class BikeModuleService {
@@ -60,7 +61,7 @@ export class BikeModuleService {
 
   //? get info
 
-  async getInfo() {
+  async getInfo(): Promise<IRez> {
     const info = await this.bikeModel.aggregate([
       {
         $group: {
@@ -71,6 +72,9 @@ export class BikeModuleService {
       },
       { $project: { _id: 1, totalBike: 1, avgPrice: 1 } },
     ]);
-    console.log(info);
+
+    const rez = statisticsCalculator(info);
+
+    return rez;
   }
 }

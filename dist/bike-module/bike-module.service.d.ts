@@ -25,6 +25,7 @@
 import { Model } from "mongoose";
 import { Bike } from "src/schemas/bike-schemas";
 import { CreateBikeDto } from "./dto/create-bike-dto";
+import { IRez } from "src/helpers/statisticsCalculator";
 export declare class BikeModuleService {
     private readonly bikeModel;
     constructor(bikeModel: Model<Bike>);
@@ -36,5 +37,5 @@ export declare class BikeModuleService {
     update(id: string, status: any): Promise<import("mongoose").Document<unknown, {}, Bike> & Bike & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    getInfo(): Promise<void>;
+    getInfo(): Promise<IRez>;
 }
