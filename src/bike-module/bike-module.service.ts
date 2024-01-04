@@ -28,6 +28,8 @@ export class BikeModuleService {
       const newBike = await this.bikeModel.findById(createBike._id, "-__v");
       return newBike;
     } catch (error) {
+      console.log(error);
+
       HttpErrors(
         HttpStatus.INTERNAL_SERVER_ERROR,
         "Oops, have some error, try later"

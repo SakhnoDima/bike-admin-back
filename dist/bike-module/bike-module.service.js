@@ -33,6 +33,7 @@ let BikeModuleService = class BikeModuleService {
             return newBike;
         }
         catch (error) {
+            console.log(error);
             (0, handleErrors_1.HttpErrors)(common_1.HttpStatus.INTERNAL_SERVER_ERROR, "Oops, have some error, try later");
         }
     }
