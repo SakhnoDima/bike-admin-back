@@ -22,7 +22,6 @@ let BikeModuleController = class BikeModuleController {
         this.bikeService = bikeService;
     }
     async create(createCatDto) {
-        console.log(11);
         return await this.bikeService.create(createCatDto);
     }
     async find() {

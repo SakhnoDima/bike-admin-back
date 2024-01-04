@@ -29,6 +29,8 @@ export class CreateBikeDto {
   @MinLength(5)
   readonly id: string;
 
+  readonly _id: Object;
+
   @IsNotEmpty()
   @IsString()
   @MinLength(5)

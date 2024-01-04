@@ -24,8 +24,6 @@ export class BikeModuleController {
   @HttpCode(HttpStatus.OK)
   @Post()
   async create(@Body() createCatDto: CreateBikeDto) {
-    console.log(11);
-
     return await this.bikeService.create(createCatDto);
   }
 

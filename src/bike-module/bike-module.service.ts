@@ -16,7 +16,7 @@ export class BikeModuleService {
 
   async create(createBikeDto: CreateBikeDto): Promise<Bike> {
     try {
-      const idIsExist = await this.bikeModel.findById(createBikeDto.id);
+      const idIsExist = await this.bikeModel.findById(createBikeDto._id);
 
       if (idIsExist)
         HttpErrors(

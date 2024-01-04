@@ -25,7 +25,7 @@ let BikeModuleService = class BikeModuleService {
     }
     async create(createBikeDto) {
         try {
-            const idIsExist = await this.bikeModel.findById(createBikeDto.id);
+            const idIsExist = await this.bikeModel.findById(createBikeDto._id);
             if (idIsExist)
                 (0, handleErrors_1.HttpErrors)(common_1.HttpStatus.FORBIDDEN, `Bike with id - ${createBikeDto.id} is exist`);
             const createBike = await this.bikeModel.create(createBikeDto);
