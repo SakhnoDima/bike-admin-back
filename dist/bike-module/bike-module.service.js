@@ -24,18 +24,12 @@ let BikeModuleService = class BikeModuleService {
         this.bikeModel = bikeModel;
     }
     async create(createBikeDto) {
-        try {
-            const idIsExist = await this.bikeModel.findById(createBikeDto._id);
-            if (idIsExist)
-                (0, handleErrors_1.HttpErrors)(common_1.HttpStatus.FORBIDDEN, `Bike with id - ${createBikeDto.id} is exist`);
-            const createBike = await this.bikeModel.create(createBikeDto);
-            const newBike = await this.bikeModel.findById(createBike._id, "-__v");
-            return newBike;
-        }
-        catch (error) {
-            console.log(error);
-            (0, handleErrors_1.HttpErrors)(common_1.HttpStatus.INTERNAL_SERVER_ERROR, "Oops, have some error, try later");
-        }
+        const idIsExist = await this.bikeModel.findOne({ id: createBikeDto.id });
+        if (idIsExist)
+            (0, handleErrors_1.HttpErrors)(common_1.HttpStatus.FORBIDDEN, `Bike with id - ${createBikeDto.id} is exist`);
+        const createBike = await this.bikeModel.create(createBikeDto);
+        const newBike = await this.bikeModel.findById(createBike._id, "-__v");
+        return newBike;
     }
     async findAll() {
         return await this.bikeModel.find().exec();

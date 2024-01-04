@@ -15,26 +15,17 @@ export class BikeModuleService {
   //? add bike to a db
 
   async create(createBikeDto: CreateBikeDto): Promise<Bike> {
-    try {
-      const idIsExist = await this.bikeModel.findById(createBikeDto._id);
+    const idIsExist = await this.bikeModel.findOne({ id: createBikeDto.id });
 
-      if (idIsExist)
-        HttpErrors(
-          HttpStatus.FORBIDDEN,
-          `Bike with id - ${createBikeDto.id} is exist`
-        );
-
-      const createBike = await this.bikeModel.create(createBikeDto);
-      const newBike = await this.bikeModel.findById(createBike._id, "-__v");
-      return newBike;
-    } catch (error) {
-      console.log(error);
-
+    if (idIsExist)
       HttpErrors(
-        HttpStatus.INTERNAL_SERVER_ERROR,
-        "Oops, have some error, try later"
+        HttpStatus.FORBIDDEN,
+        `Bike with id - ${createBikeDto.id} is exist`
       );
-    }
+
+    const createBike = await this.bikeModel.create(createBikeDto);
+    const newBike = await this.bikeModel.findById(createBike._id, "-__v");
+    return newBike;
   }
 
   //? find all bikes from db
