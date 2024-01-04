@@ -23,10 +23,10 @@ export class BikeModuleController {
 
   @HttpCode(HttpStatus.OK)
   @Post()
-  async create(@Body() createCatDto: CreateBikeDto, @Res() res: Response) {
-    await this.bikeService.create(createCatDto);
+  async create(@Body() createCatDto: CreateBikeDto) {
+    console.log(11);
 
-    res.json({ message: "Bike was saved successful" });
+    return await this.bikeService.create(createCatDto);
   }
 
   @Get()

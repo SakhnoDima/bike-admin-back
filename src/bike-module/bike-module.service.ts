@@ -17,7 +17,8 @@ export class BikeModuleService {
   async create(createCatDto: CreateBikeDto): Promise<Bike> {
     try {
       const createBike = await this.bikeModel.create(createCatDto);
-      return createBike;
+      const newBike = await this.bikeModel.findById(createBike._id, "-__v");
+      return newBike;
     } catch (error) {
       HttpErrors(
         HttpStatus.INTERNAL_SERVER_ERROR,

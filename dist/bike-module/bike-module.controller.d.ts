@@ -25,14 +25,13 @@
 /// <reference types="mongoose/types/inferschematype" />
 import { BikeModuleService } from "./bike-module.service";
 import { CreateBikeDto } from "./dto/create-bike-dto";
-import { Response } from "express";
 import { Bike } from "src/schemas/bike-schemas";
 import { UpdateStatusDto } from "./dto/update-status-dto";
 import { IRez } from "src/helpers/statisticsCalculator";
 export declare class BikeModuleController {
     private readonly bikeService;
     constructor(bikeService: BikeModuleService);
-    create(createCatDto: CreateBikeDto, res: Response): Promise<void>;
+    create(createCatDto: CreateBikeDto): Promise<Bike>;
     find(): Promise<Bike[]>;
     delete(id: string): Promise<import("mongoose").ModifyResult<import("mongoose").Document<unknown, {}, Bike> & Bike & {
         _id: import("mongoose").Types.ObjectId;

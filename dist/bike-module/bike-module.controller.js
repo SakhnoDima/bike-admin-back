@@ -21,9 +21,9 @@ let BikeModuleController = class BikeModuleController {
     constructor(bikeService) {
         this.bikeService = bikeService;
     }
-    async create(createCatDto, res) {
-        await this.bikeService.create(createCatDto);
-        res.json({ message: "Bike was saved successful" });
+    async create(createCatDto) {
+        console.log(11);
+        return await this.bikeService.create(createCatDto);
     }
     async find() {
         return await this.bikeService.findAll();
@@ -43,9 +43,8 @@ __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
-    __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_bike_dto_1.CreateBikeDto, Object]),
+    __metadata("design:paramtypes", [create_bike_dto_1.CreateBikeDto]),
     __metadata("design:returntype", Promise)
 ], BikeModuleController.prototype, "create", null);
 __decorate([

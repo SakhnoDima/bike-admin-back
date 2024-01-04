@@ -26,7 +26,8 @@ let BikeModuleService = class BikeModuleService {
     async create(createCatDto) {
         try {
             const createBike = await this.bikeModel.create(createCatDto);
-            return createBike;
+            const newBike = await this.bikeModel.findById(createBike._id, "-__v");
+            return newBike;
         }
         catch (error) {
             (0, handleErrors_1.HttpErrors)(common_1.HttpStatus.INTERNAL_SERVER_ERROR, "Oops, have some error, try later");
