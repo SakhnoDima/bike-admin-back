@@ -29,7 +29,7 @@ import { IRez } from "src/helpers/statisticsCalculator";
 export declare class BikeModuleService {
     private readonly bikeModel;
     constructor(bikeModel: Model<Bike>);
-    create(createCatDto: CreateBikeDto): Promise<Bike>;
+    create(createBikeDto: CreateBikeDto): Promise<Bike>;
     findAll(): Promise<Bike[]>;
     delete(id: string): Promise<import("mongoose").ModifyResult<import("mongoose").Document<unknown, {}, Bike> & Bike & {
         _id: import("mongoose").Types.ObjectId;

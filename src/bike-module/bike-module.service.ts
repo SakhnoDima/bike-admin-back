@@ -14,9 +14,17 @@ export class BikeModuleService {
 
   //? add bike to a db
 
-  async create(createCatDto: CreateBikeDto): Promise<Bike> {
+  async create(createBikeDto: CreateBikeDto): Promise<Bike> {
     try {
-      const createBike = await this.bikeModel.create(createCatDto);
+      const idIsExist = await this.bikeModel.findById(createBikeDto.id);
+
+      if (idIsExist)
+        HttpErrors(
+          HttpStatus.FORBIDDEN,
+          `Bike with id - ${createBikeDto.id} is exist`
+        );
+
+      const createBike = await this.bikeModel.create(createBikeDto);
       const newBike = await this.bikeModel.findById(createBike._id, "-__v");
       return newBike;
     } catch (error) {
