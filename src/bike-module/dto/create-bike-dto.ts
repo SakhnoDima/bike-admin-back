@@ -1,4 +1,11 @@
-import { IsNotEmpty, IsNumber, IsString, MinLength } from "class-validator";
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  MinLength,
+} from "class-validator";
+import { bikeType } from "../constant/constants";
 
 export class CreateBikeDto {
   @IsNotEmpty()
@@ -8,7 +15,7 @@ export class CreateBikeDto {
 
   @IsNotEmpty()
   @IsString()
-  @MinLength(5)
+  @IsEnum(bikeType)
   readonly type: string;
 
   @IsNotEmpty()
@@ -17,8 +24,8 @@ export class CreateBikeDto {
   readonly color: string;
 
   @IsNotEmpty()
-  @IsNumber()
-  readonly wheelSize: number;
+  @IsString()
+  readonly location: string;
 
   @IsNotEmpty()
   @IsNumber()

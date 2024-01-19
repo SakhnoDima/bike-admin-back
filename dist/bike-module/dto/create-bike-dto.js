@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateBikeDto = void 0;
 const class_validator_1 = require("class-validator");
+const constants_1 = require("../constant/constants");
 class CreateBikeDto {
 }
 exports.CreateBikeDto = CreateBikeDto;
@@ -23,7 +24,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.MinLength)(5),
+    (0, class_validator_1.IsEnum)(constants_1.bikeType),
     __metadata("design:type", String)
 ], CreateBikeDto.prototype, "type", void 0);
 __decorate([
@@ -34,9 +35,9 @@ __decorate([
 ], CreateBikeDto.prototype, "color", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], CreateBikeDto.prototype, "wheelSize", void 0);
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateBikeDto.prototype, "location", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsNumber)(),
