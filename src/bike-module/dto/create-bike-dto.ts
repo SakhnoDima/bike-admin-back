@@ -38,8 +38,6 @@ export class CreateBikeDto {
 
   readonly _id: Object;
 
-  @IsNotEmpty()
   @IsString()
-  @MinLength(5)
   readonly description: string;
 }

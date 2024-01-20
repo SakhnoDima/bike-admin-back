@@ -46,7 +46,7 @@ __decorate([
     __metadata("design:type", String)
 ], Bike.prototype, "id", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ required: true }),
+    (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], Bike.prototype, "description", void 0);
 __decorate([

@@ -30,7 +30,7 @@ export class Bike {
   @Prop({ required: true })
   id: string;
 
-  @Prop({ required: true })
+  @Prop()
   description: string;
 
   @Prop({ type: String, enum: Status, default: Status[0] })
