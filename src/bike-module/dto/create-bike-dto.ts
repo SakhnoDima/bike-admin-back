@@ -20,7 +20,7 @@ export class CreateBikeDto {
 
   @IsNotEmpty()
   @IsString()
-  @MinLength(5)
+  @MinLength(3)
   readonly color: string;
 
   @IsNotEmpty()

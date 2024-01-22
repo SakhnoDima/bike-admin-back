@@ -30,7 +30,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.MinLength)(5),
+    (0, class_validator_1.MinLength)(3),
     __metadata("design:type", String)
 ], CreateBikeDto.prototype, "color", void 0);
 __decorate([
