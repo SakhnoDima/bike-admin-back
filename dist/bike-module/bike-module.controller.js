@@ -14,9 +14,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BikeModuleController = void 0;
 const common_1 = require("@nestjs/common");
+const multer_1 = require("multer");
 const bike_module_service_1 = require("./bike-module.service");
 const create_bike_dto_1 = require("./dto/create-bike-dto");
 const update_status_dto_1 = require("./dto/update-status-dto");
+const platform_express_1 = require("@nestjs/platform-express");
 let BikeModuleController = class BikeModuleController {
     constructor(bikeService) {
         this.bikeService = bikeService;
@@ -35,6 +37,10 @@ let BikeModuleController = class BikeModuleController {
     }
     async getInfo() {
         return await this.bikeService.getInfo();
+    }
+    async uploadFile(file) {
+        const rez = await this.bikeService.cloudService(file);
+        return { path: rez };
     }
 };
 exports.BikeModuleController = BikeModuleController;
@@ -73,6 +79,18 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], BikeModuleController.prototype, "getInfo", null);
+__decorate([
+    (0, common_1.Post)("/update_photo"),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)("file", {
+        storage: (0, multer_1.diskStorage)({
+            destination: "../tmp",
+        }),
+    })),
+    __param(0, (0, common_1.UploadedFile)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], BikeModuleController.prototype, "uploadFile", null);
 exports.BikeModuleController = BikeModuleController = __decorate([
     (0, common_1.Controller)("bike"),
     __metadata("design:paramtypes", [bike_module_service_1.BikeModuleService])

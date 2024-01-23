@@ -16,9 +16,11 @@ exports.BikeModuleService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
+const cloudinary = require("cloudinary").v2;
 const bike_schemas_1 = require("../schemas/bike-schemas");
 const handleErrors_1 = require("../helpers/handleErrors");
 const statisticsCalculator_1 = require("../helpers/statisticsCalculator");
+const cloudinaryOptions_1 = require("./constant/cloudinaryOptions");
 let BikeModuleService = class BikeModuleService {
     constructor(bikeModel) {
         this.bikeModel = bikeModel;
@@ -65,6 +67,15 @@ let BikeModuleService = class BikeModuleService {
         ]);
         const rez = (0, statisticsCalculator_1.statisticsCalculator)(info);
         return rez;
+    }
+    async cloudService(file) {
+        try {
+            const result = await cloudinary.uploader.upload(file.path, cloudinaryOptions_1.options);
+            return result.url;
+        }
+        catch (error) {
+            (0, handleErrors_1.HttpErrors)(common_1.HttpStatus.INTERNAL_SERVER_ERROR, error.message);
+        }
     }
 };
 exports.BikeModuleService = BikeModuleService;

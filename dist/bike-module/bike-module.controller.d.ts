@@ -1,3 +1,4 @@
+/// <reference types="multer" />
 /// <reference types="mongoose/types/aggregate" />
 /// <reference types="mongoose/types/callback" />
 /// <reference types="mongoose/types/collection" />
@@ -28,6 +29,7 @@ import { CreateBikeDto } from "./dto/create-bike-dto";
 import { Bike } from "src/schemas/bike-schemas";
 import { UpdateStatusDto } from "./dto/update-status-dto";
 import { IRez } from "src/helpers/statisticsCalculator";
+import { UploadPhotoDto } from "./dto/uploadBikePhoto-dto";
 export declare class BikeModuleController {
     private readonly bikeService;
     constructor(bikeService: BikeModuleService);
@@ -38,4 +40,5 @@ export declare class BikeModuleController {
     }>>;
     update(id: string, updateStatusDto: UpdateStatusDto): Promise<Bike>;
     getInfo(): Promise<IRez>;
+    uploadFile(file: Express.Multer.File): Promise<UploadPhotoDto>;
 }

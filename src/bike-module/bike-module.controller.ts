@@ -9,13 +9,18 @@ import {
   Patch,
   Post,
   Res,
+  UploadedFile,
+  UseInterceptors,
 } from "@nestjs/common";
+import { diskStorage } from "multer";
+
 import { BikeModuleService } from "./bike-module.service";
 import { CreateBikeDto } from "./dto/create-bike-dto";
-import { Response } from "express";
 import { Bike } from "src/schemas/bike-schemas";
 import { UpdateStatusDto } from "./dto/update-status-dto";
 import { IRez } from "src/helpers/statisticsCalculator";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { UploadPhotoDto } from "./dto/uploadBikePhoto-dto";
 
 @Controller("bike")
 export class BikeModuleController {
@@ -48,5 +53,20 @@ export class BikeModuleController {
   @Get("/info")
   async getInfo(): Promise<IRez> {
     return await this.bikeService.getInfo();
+  }
+
+  @Post("/update_photo")
+  @UseInterceptors(
+    FileInterceptor("file", {
+      storage: diskStorage({
+        destination: "../tmp",
+      }),
+    })
+  )
+  async uploadFile(
+    @UploadedFile() file: Express.Multer.File
+  ): Promise<UploadPhotoDto> {
+    const rez = await this.bikeService.cloudService(file);
+    return { path: rez };
   }
 }

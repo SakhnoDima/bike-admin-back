@@ -1,10 +1,15 @@
 import { HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
+import { UploadApiErrorResponse, UploadApiResponse, v2 } from "cloudinary";
+const cloudinary = require("cloudinary").v2;
+import toStream = require("buffer-to-stream");
+
 import { Bike } from "src/schemas/bike-schemas";
 import { CreateBikeDto } from "./dto/create-bike-dto";
 import { HttpErrors } from "src/helpers/handleErrors";
 import { IRez, statisticsCalculator } from "src/helpers/statisticsCalculator";
+import { options } from "./constant/cloudinaryOptions";
 
 @Injectable()
 export class BikeModuleService {
@@ -78,5 +83,14 @@ export class BikeModuleService {
     const rez = statisticsCalculator(info);
 
     return rez;
+  }
+
+  async cloudService(file: Express.Multer.File): Promise<string> {
+    try {
+      const result = await cloudinary.uploader.upload(file.path, options);
+      return result.url;
+    } catch (error) {
+      HttpErrors(HttpStatus.INTERNAL_SERVER_ERROR, error.message);
+    }
   }
 }

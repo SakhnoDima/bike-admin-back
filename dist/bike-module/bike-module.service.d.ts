@@ -1,3 +1,4 @@
+/// <reference types="multer" />
 /// <reference types="mongoose/types/aggregate" />
 /// <reference types="mongoose/types/callback" />
 /// <reference types="mongoose/types/collection" />
@@ -38,4 +39,5 @@ export declare class BikeModuleService {
         _id: import("mongoose").Types.ObjectId;
     }>;
     getInfo(): Promise<IRez>;
+    cloudService(file: Express.Multer.File): Promise<string>;
 }

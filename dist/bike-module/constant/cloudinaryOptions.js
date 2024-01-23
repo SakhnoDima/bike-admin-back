@@ -7,4 +7,4 @@ exports.options = {
     overwrite: true,
     folder: "bikes",
 };
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=cloudinaryOptions.js.map
