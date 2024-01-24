@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { IsEmail } from "class-validator";
 import { HydratedDocument } from "mongoose";
-import { bikeType } from "src/bike-module/constant/constants";
 
 export type BikeDocument = HydratedDocument<User>;
 
@@ -12,6 +11,12 @@ export class User {
 
   @Prop({ required: true })
   password: string;
+
+  @Prop({ default: null })
+  token: string;
+
+  @Prop({ default: null })
+  avatar: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

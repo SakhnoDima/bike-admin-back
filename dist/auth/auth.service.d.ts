@@ -23,10 +23,16 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 import { Model } from "mongoose";
+import { JwtService } from "@nestjs/jwt";
 import { User } from "src/schemas/user-schema";
-import { UserRegisterDTO } from "./dto/register-dto";
+import { UserRegisterRequestDTO, UserRegisterResponseDTO, UserWithTokenDTO } from "./dto/register-dto";
 export declare class AuthService {
     private readonly userModel;
-    constructor(userModel: Model<User>);
-    register({ email, password, }: UserRegisterDTO): Promise<UserRegisterDTO>;
+    private jwtService;
+    constructor(userModel: Model<User>, jwtService: JwtService);
+    register({ email, password, }: UserRegisterRequestDTO): Promise<UserRegisterResponseDTO>;
+    logIn({ email, password, }: UserRegisterRequestDTO): Promise<UserWithTokenDTO>;
+    logOut(id: string): Promise<{
+        message: string;
+    }>;
 }

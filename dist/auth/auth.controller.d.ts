@@ -1,7 +1,11 @@
 import { AuthService } from "./auth.service";
-import { UserRegisterDTO } from "./dto/register-dto";
+import { UserRegisterRequestDTO, UserRegisterResponseDTO, UserWithTokenDTO } from "./dto/register-dto";
 export declare class AuthController {
     private authService;
     constructor(authService: AuthService);
-    signInn(user: UserRegisterDTO): Promise<UserRegisterDTO>;
+    register(user: UserRegisterRequestDTO): Promise<UserRegisterResponseDTO>;
+    loginIn(user: UserRegisterRequestDTO): Promise<UserWithTokenDTO>;
+    logOut(req: any): Promise<{
+        message: string;
+    }>;
 }

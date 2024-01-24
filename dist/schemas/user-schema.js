@@ -23,6 +23,14 @@ __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: null }),
+    __metadata("design:type", String)
+], User.prototype, "token", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: null }),
+    __metadata("design:type", String)
+], User.prototype, "avatar", void 0);
 exports.User = User = __decorate([
     (0, mongoose_1.Schema)()
 ], User);

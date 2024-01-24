@@ -16,12 +16,19 @@ exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const register_dto_1 = require("./dto/register-dto");
+const jwt_auth_guard_1 = require("./guards/jwt-auth.guard");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
     }
-    signInn(user) {
+    register(user) {
         return this.authService.register(user);
+    }
+    loginIn(user) {
+        return this.authService.logIn(user);
+    }
+    logOut(req) {
+        return this.authService.logOut(req.user.id);
     }
 };
 exports.AuthController = AuthController;
@@ -29,9 +36,24 @@ __decorate([
     (0, common_1.Post)("register"),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [register_dto_1.UserRegisterDTO]),
+    __metadata("design:paramtypes", [register_dto_1.UserRegisterRequestDTO]),
     __metadata("design:returntype", Promise)
-], AuthController.prototype, "signInn", null);
+], AuthController.prototype, "register", null);
+__decorate([
+    (0, common_1.Post)("logIn"),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [register_dto_1.UserRegisterRequestDTO]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "loginIn", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Post)("logOut"),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "logOut", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)("auth"),
     __metadata("design:paramtypes", [auth_service_1.AuthService])

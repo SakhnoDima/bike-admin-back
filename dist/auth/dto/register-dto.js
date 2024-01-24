@@ -9,20 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserRegisterDTO = void 0;
+exports.UserWithTokenDTO = exports.UserRegisterRequestDTO = exports.UserRegisterResponseDTO = void 0;
 const class_validator_1 = require("class-validator");
-class UserRegisterDTO {
+class UserRegisterResponseDTO {
 }
-exports.UserRegisterDTO = UserRegisterDTO;
+exports.UserRegisterResponseDTO = UserRegisterResponseDTO;
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
-], UserRegisterDTO.prototype, "email", void 0);
+], UserRegisterResponseDTO.prototype, "email", void 0);
+class UserRegisterRequestDTO extends UserRegisterResponseDTO {
+}
+exports.UserRegisterRequestDTO = UserRegisterRequestDTO;
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], UserRegisterDTO.prototype, "password", void 0);
+], UserRegisterRequestDTO.prototype, "password", void 0);
+class UserWithTokenDTO extends UserRegisterResponseDTO {
+}
+exports.UserWithTokenDTO = UserWithTokenDTO;
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UserWithTokenDTO.prototype, "token", void 0);
 //# sourceMappingURL=register-dto.js.map
