@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CatSchema = exports.Bike = exports.Status = void 0;
+exports.BikesSchema = exports.Bike = exports.Status = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const constants_1 = require("../bike-module/constant/constants");
 var Status;
@@ -56,5 +56,5 @@ __decorate([
 exports.Bike = Bike = __decorate([
     (0, mongoose_1.Schema)()
 ], Bike);
-exports.CatSchema = mongoose_1.SchemaFactory.createForClass(Bike);
+exports.BikesSchema = mongoose_1.SchemaFactory.createForClass(Bike);
 //# sourceMappingURL=bike-schemas.js.map

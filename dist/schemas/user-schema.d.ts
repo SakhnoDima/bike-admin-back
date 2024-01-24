@@ -23,24 +23,13 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 import { HydratedDocument } from "mongoose";
-export type BikeDocument = HydratedDocument<Bike>;
-export declare enum Status {
-    "available" = 0,
-    "busy" = 1,
-    "unavailable" = 2
+export type BikeDocument = HydratedDocument<User>;
+export declare class User {
+    email: string;
+    password: string;
 }
-export declare class Bike {
-    name: string;
-    type: string;
-    color: string;
-    location: string;
-    price: number;
-    id: string;
-    description: string;
-    status: string;
-}
-export declare const BikesSchema: import("mongoose").Schema<Bike, import("mongoose").Model<Bike, any, any, any, import("mongoose").Document<unknown, any, Bike> & Bike & {
+export declare const UserSchema: import("mongoose").Schema<User, import("mongoose").Model<User, any, any, any, import("mongoose").Document<unknown, any, User> & User & {
     _id: import("mongoose").Types.ObjectId;
-}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Bike, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<Bike>> & import("mongoose").FlatRecord<Bike> & {
+}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, User, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<User>> & import("mongoose").FlatRecord<User> & {
     _id: import("mongoose").Types.ObjectId;
 }>;

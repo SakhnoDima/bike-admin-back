@@ -1,9 +1,7 @@
 import { HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-import { UploadApiErrorResponse, UploadApiResponse, v2 } from "cloudinary";
 const cloudinary = require("cloudinary").v2;
-import toStream = require("buffer-to-stream");
 
 import { Bike } from "src/schemas/bike-schemas";
 import { CreateBikeDto } from "./dto/create-bike-dto";

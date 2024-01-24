@@ -19,7 +19,7 @@ exports.BikeModuleModule = BikeModuleModule;
 exports.BikeModuleModule = BikeModuleModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forFeature([{ name: bike_schemas_1.Bike.name, schema: bike_schemas_1.CatSchema }]),
+            mongoose_1.MongooseModule.forFeature([{ name: bike_schemas_1.Bike.name, schema: bike_schemas_1.BikesSchema }]),
         ],
         controllers: [bike_module_controller_1.BikeModuleController],
         providers: [bike_module_service_1.BikeModuleService, cloudinary_provider_1.CloudinaryProvider],

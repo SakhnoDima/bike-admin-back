@@ -37,4 +37,4 @@ export class Bike {
   status: string;
 }
 
-export const CatSchema = SchemaFactory.createForClass(Bike);
+export const BikesSchema = SchemaFactory.createForClass(Bike);
