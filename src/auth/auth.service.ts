@@ -33,7 +33,9 @@ export class AuthService {
     const hashPass = await bcrypt.hash(password, salt);
 
     const newUser = await this.userModel.create({ email, password: hashPass });
-    return newUser;
+    return {
+      email: newUser.email,
+    };
   }
   async logIn({
     email,

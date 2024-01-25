@@ -1,4 +1,4 @@
-import { HttpStatus, Injectable, UnauthorizedException } from "@nestjs/common";
+import { HttpStatus, Injectable } from "@nestjs/common";
 import { JsonWebTokenError } from "@nestjs/jwt";
 import { AuthGuard } from "@nestjs/passport";
 import { HttpErrors } from "src/helpers/handleErrors";

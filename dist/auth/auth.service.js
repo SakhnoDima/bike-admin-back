@@ -33,7 +33,9 @@ let AuthService = class AuthService {
         const salt = await bcrypt.genSalt();
         const hashPass = await bcrypt.hash(password, salt);
         const newUser = await this.userModel.create({ email, password: hashPass });
-        return newUser;
+        return {
+            email: newUser.email,
+        };
     }
     async logIn({ email, password, }) {
         const user = await this.userModel.findOne({ email });
