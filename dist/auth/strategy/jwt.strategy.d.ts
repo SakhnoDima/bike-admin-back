@@ -25,11 +25,12 @@
 import { Strategy } from "passport-jwt";
 import { User } from "src/schemas/user-schema";
 import { Model } from "mongoose";
+import { Request } from "express";
 declare const JwtStrategy_base: new (...args: any[]) => Strategy;
 export declare class JwtStrategy extends JwtStrategy_base {
     private readonly userModel;
     constructor(userModel: Model<User>);
-    validate(payload: any): Promise<import("mongoose").Document<unknown, {}, User> & User & {
+    validate(req: Request, payload: any): Promise<import("mongoose").Document<unknown, {}, User> & User & {
         _id: import("mongoose").Types.ObjectId;
     }>;
 }

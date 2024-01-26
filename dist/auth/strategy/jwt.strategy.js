@@ -26,13 +26,15 @@ let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(pas
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
             ignoreExpiration: false,
             secretOrKey: process.env.SECRET_KEY,
+            passReqToCallback: true,
         });
         this.userModel = userModel;
     }
-    async validate(payload) {
+    async validate(req, payload) {
+        const accessToken = req.headers["authorization"].split(" ")[1];
         const user = await this.userModel.findById(payload.id);
-        if (!user || !user.token) {
-            throw (0, handleErrors_1.HttpErrors)(common_1.HttpStatus.UNAUTHORIZED, `Login first please`);
+        if (!user || !user.token || accessToken !== user.token) {
+            throw (0, handleErrors_1.HttpErrors)(common_1.HttpStatus.UNAUTHORIZED, "The token does not belong to this user");
         }
         return user;
     }
