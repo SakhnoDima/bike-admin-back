@@ -30,11 +30,13 @@ import { Bike } from "src/schemas/bike-schemas";
 import { UpdateStatusDto } from "./dto/update-status-dto";
 import { IRez } from "src/helpers/statisticsCalculator";
 import { UploadPhotoDto } from "./dto/uploadBikePhoto-dto";
+import { UserIdFromReqDTO } from "src/auth/dto/register-dto";
 export declare class BikeModuleController {
     private readonly bikeService;
     constructor(bikeService: BikeModuleService);
-    create(createCatDto: CreateBikeDto): Promise<Bike>;
+    create(createCatDto: CreateBikeDto, req: UserIdFromReqDTO): Promise<Bike>;
     find(): Promise<Bike[]>;
+    findUserBikes(req: UserIdFromReqDTO): Promise<Bike[]>;
     delete(id: string): Promise<import("mongoose").ModifyResult<import("mongoose").Document<unknown, {}, Bike> & Bike & {
         _id: import("mongoose").Types.ObjectId;
     }>>;

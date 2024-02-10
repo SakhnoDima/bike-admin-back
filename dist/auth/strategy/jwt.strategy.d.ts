@@ -30,8 +30,6 @@ declare const JwtStrategy_base: new (...args: any[]) => Strategy;
 export declare class JwtStrategy extends JwtStrategy_base {
     private readonly userModel;
     constructor(userModel: Model<User>);
-    validate(req: Request, payload: any): Promise<import("mongoose").Document<unknown, {}, User> & User & {
-        _id: import("mongoose").Types.ObjectId;
-    }>;
+    validate(req: Request, payload: any): Promise<import("mongoose").Types.ObjectId>;
 }
 export {};

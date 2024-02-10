@@ -25,16 +25,24 @@ let BikeModuleService = class BikeModuleService {
     constructor(bikeModel) {
         this.bikeModel = bikeModel;
     }
-    async create(createBikeDto) {
+    async create(createBikeDto, owner) {
         const idIsExist = await this.bikeModel.findOne({ id: createBikeDto.id });
         if (idIsExist)
             (0, handleErrors_1.HttpErrors)(common_1.HttpStatus.FORBIDDEN, `Bike with id - ${createBikeDto.id} is exist`);
-        const createBike = await this.bikeModel.create(createBikeDto);
+        const createBike = await this.bikeModel.create({
+            ...createBikeDto,
+            owner,
+        });
         const newBike = await this.bikeModel.findById(createBike._id, "-__v");
         return newBike;
     }
     async findAll() {
         return await this.bikeModel.find().exec();
+    }
+    async findUserBikes(userId) {
+        return await this.bikeModel.find({
+            owner: userId,
+        });
     }
     async delete(id) {
         const deletedBike = await this.bikeModel

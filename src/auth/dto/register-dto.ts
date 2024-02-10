@@ -1,4 +1,12 @@
 import { IsEmail, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { Schema } from "mongoose";
+
+export class UserIdFromReqDTO extends Request {
+  @IsNotEmpty()
+  readonly user: {
+    id: Schema.Types.ObjectId;
+  };
+}
 
 export class UserRegisterResponseDTO {
   @IsNotEmpty()

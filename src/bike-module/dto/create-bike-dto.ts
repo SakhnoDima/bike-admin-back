@@ -6,6 +6,7 @@ import {
   MinLength,
 } from "class-validator";
 import { bikeType } from "../constant/constants";
+import { Schema } from "mongoose";
 
 export class CreateBikeDto {
   @IsNotEmpty()
@@ -40,4 +41,6 @@ export class CreateBikeDto {
 
   @IsString()
   readonly description: string;
+
+  readonly owner: Schema.Types.ObjectId;
 }

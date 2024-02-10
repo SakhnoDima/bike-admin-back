@@ -8,8 +8,10 @@ import {
   Param,
   Patch,
   Post,
+  Req,
   Res,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
 import { diskStorage } from "multer";
@@ -21,20 +23,32 @@ import { UpdateStatusDto } from "./dto/update-status-dto";
 import { IRez } from "src/helpers/statisticsCalculator";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { UploadPhotoDto } from "./dto/uploadBikePhoto-dto";
+import { Schema } from "mongoose";
+import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
+import { UserIdFromReqDTO } from "src/auth/dto/register-dto";
 
+@UseGuards(JwtAuthGuard)
 @Controller("bike")
 export class BikeModuleController {
   constructor(private readonly bikeService: BikeModuleService) {}
 
   @HttpCode(HttpStatus.OK)
   @Post()
-  async create(@Body() createCatDto: CreateBikeDto) {
-    return await this.bikeService.create(createCatDto);
+  async create(
+    @Body() createCatDto: CreateBikeDto,
+    @Req() req: UserIdFromReqDTO
+  ) {
+    return await this.bikeService.create(createCatDto, req.user);
   }
 
   @Get()
   async find(): Promise<Bike[]> {
     return await this.bikeService.findAll();
+  }
+
+  @Get("/get-by-id")
+  async findUserBikes(@Req() req: UserIdFromReqDTO) {
+    return await this.bikeService.findUserBikes(req.user);
   }
 
   @Delete(":id")

@@ -1,6 +1,6 @@
 import { HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+import { Model, Schema } from "mongoose";
 const cloudinary = require("cloudinary").v2;
 
 import { Bike } from "src/schemas/bike-schemas";
@@ -17,7 +17,10 @@ export class BikeModuleService {
 
   //? add bike to a db
 
-  async create(createBikeDto: CreateBikeDto): Promise<Bike> {
+  async create(
+    createBikeDto: CreateBikeDto,
+    owner: { id: Schema.Types.ObjectId }
+  ): Promise<Bike> {
     const idIsExist = await this.bikeModel.findOne({ id: createBikeDto.id });
 
     if (idIsExist)
@@ -26,7 +29,10 @@ export class BikeModuleService {
         `Bike with id - ${createBikeDto.id} is exist`
       );
 
-    const createBike = await this.bikeModel.create(createBikeDto);
+    const createBike = await this.bikeModel.create({
+      ...createBikeDto,
+      owner,
+    });
     const newBike = await this.bikeModel.findById(createBike._id, "-__v");
     return newBike;
   }
@@ -35,6 +41,14 @@ export class BikeModuleService {
 
   async findAll(): Promise<Bike[]> {
     return await this.bikeModel.find().exec();
+  }
+
+  //? find bikes from db by userId
+
+  async findUserBikes(userId: { id: Schema.Types.ObjectId }): Promise<Bike[]> {
+    return await this.bikeModel.find({
+      owner: userId,
+    });
   }
 
   //? delete bike from db by id

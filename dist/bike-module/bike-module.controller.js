@@ -19,15 +19,20 @@ const bike_module_service_1 = require("./bike-module.service");
 const create_bike_dto_1 = require("./dto/create-bike-dto");
 const update_status_dto_1 = require("./dto/update-status-dto");
 const platform_express_1 = require("@nestjs/platform-express");
+const jwt_auth_guard_1 = require("../auth/guards/jwt-auth.guard");
+const register_dto_1 = require("../auth/dto/register-dto");
 let BikeModuleController = class BikeModuleController {
     constructor(bikeService) {
         this.bikeService = bikeService;
     }
-    async create(createCatDto) {
-        return await this.bikeService.create(createCatDto);
+    async create(createCatDto, req) {
+        return await this.bikeService.create(createCatDto, req.user);
     }
     async find() {
         return await this.bikeService.findAll();
+    }
+    async findUserBikes(req) {
+        return await this.bikeService.findUserBikes(req.user);
     }
     async delete(id) {
         return this.bikeService.delete(id);
@@ -48,8 +53,10 @@ __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_bike_dto_1.CreateBikeDto]),
+    __metadata("design:paramtypes", [create_bike_dto_1.CreateBikeDto,
+        register_dto_1.UserIdFromReqDTO]),
     __metadata("design:returntype", Promise)
 ], BikeModuleController.prototype, "create", null);
 __decorate([
@@ -58,6 +65,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], BikeModuleController.prototype, "find", null);
+__decorate([
+    (0, common_1.Get)("/get-by-id"),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [register_dto_1.UserIdFromReqDTO]),
+    __metadata("design:returntype", Promise)
+], BikeModuleController.prototype, "findUserBikes", null);
 __decorate([
     (0, common_1.Delete)(":id"),
     __param(0, (0, common_1.Param)("id")),
@@ -92,6 +106,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], BikeModuleController.prototype, "uploadFile", null);
 exports.BikeModuleController = BikeModuleController = __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Controller)("bike"),
     __metadata("design:paramtypes", [bike_module_service_1.BikeModuleService])
 ], BikeModuleController);

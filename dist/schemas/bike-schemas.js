@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BikesSchema = exports.Bike = exports.Status = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
+const mongoose_2 = require("mongoose");
 const constants_1 = require("../bike-module/constant/constants");
 var Status;
 (function (Status) {
@@ -53,6 +54,10 @@ __decorate([
     (0, mongoose_1.Prop)({ type: String, enum: Status, default: Status[0] }),
     __metadata("design:type", String)
 ], Bike.prototype, "status", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: mongoose_2.SchemaTypes.ObjectId, require: true, ref: "user" }),
+    __metadata("design:type", String)
+], Bike.prototype, "owner", void 0);
 exports.Bike = Bike = __decorate([
     (0, mongoose_1.Schema)()
 ], Bike);

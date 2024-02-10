@@ -36,7 +36,7 @@ let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(pas
         if (!user || !user.token || accessToken !== user.token) {
             throw (0, handleErrors_1.HttpErrors)(common_1.HttpStatus.UNAUTHORIZED, "The token does not belong to this user");
         }
-        return user;
+        return user._id;
     }
 };
 exports.JwtStrategy = JwtStrategy;

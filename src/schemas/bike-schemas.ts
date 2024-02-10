@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument } from "mongoose";
+import { HydratedDocument, SchemaType, SchemaTypes } from "mongoose";
 import { bikeType } from "src/bike-module/constant/constants";
 
 export type BikeDocument = HydratedDocument<Bike>;
@@ -35,6 +35,9 @@ export class Bike {
 
   @Prop({ type: String, enum: Status, default: Status[0] })
   status: string;
+
+  @Prop({ type: SchemaTypes.ObjectId, require: true, ref: "user" })
+  owner: string;
 }
 
 export const BikesSchema = SchemaFactory.createForClass(Bike);
