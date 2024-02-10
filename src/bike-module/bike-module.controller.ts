@@ -27,11 +27,11 @@ import { Schema } from "mongoose";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { UserIdFromReqDTO } from "src/auth/dto/register-dto";
 
-@UseGuards(JwtAuthGuard)
 @Controller("bike")
 export class BikeModuleController {
   constructor(private readonly bikeService: BikeModuleService) {}
 
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   @Post()
   async create(
@@ -46,16 +46,19 @@ export class BikeModuleController {
     return await this.bikeService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get("/get-by-id")
   async findUserBikes(@Req() req: UserIdFromReqDTO) {
     return await this.bikeService.findUserBikes(req.user);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(":id")
   async delete(@Param("id") id: string) {
     return this.bikeService.delete(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(":id")
   async update(
     @Param("id") id: string,
@@ -64,11 +67,13 @@ export class BikeModuleController {
     return this.bikeService.update(id, updateStatusDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get("/info")
   async getInfo(): Promise<IRez> {
     return await this.bikeService.getInfo();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post("/update_photo")
   @UseInterceptors(
     FileInterceptor("file", {

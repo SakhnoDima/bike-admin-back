@@ -50,6 +50,7 @@ let BikeModuleController = class BikeModuleController {
 };
 exports.BikeModuleController = BikeModuleController;
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
@@ -66,6 +67,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], BikeModuleController.prototype, "find", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)("/get-by-id"),
     __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
@@ -73,6 +75,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], BikeModuleController.prototype, "findUserBikes", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Delete)(":id"),
     __param(0, (0, common_1.Param)("id")),
     __metadata("design:type", Function),
@@ -80,6 +83,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], BikeModuleController.prototype, "delete", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Patch)(":id"),
     __param(0, (0, common_1.Param)("id")),
     __param(1, (0, common_1.Body)()),
@@ -88,12 +92,14 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], BikeModuleController.prototype, "update", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)("/info"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], BikeModuleController.prototype, "getInfo", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)("/update_photo"),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)("file", {
         storage: (0, multer_1.diskStorage)({
@@ -106,7 +112,6 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], BikeModuleController.prototype, "uploadFile", null);
 exports.BikeModuleController = BikeModuleController = __decorate([
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Controller)("bike"),
     __metadata("design:paramtypes", [bike_module_service_1.BikeModuleService])
 ], BikeModuleController);
