@@ -43,6 +43,8 @@ export declare class BikeModuleService {
     update(id: string, status: any): Promise<import("mongoose").Document<unknown, {}, Bike> & Bike & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    getInfo(): Promise<IRez>;
+    getInfo(userId: {
+        id: Schema.Types.ObjectId;
+    }): Promise<IRez>;
     cloudService(file: Express.Multer.File): Promise<string>;
 }

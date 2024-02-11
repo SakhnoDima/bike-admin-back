@@ -40,8 +40,8 @@ let BikeModuleController = class BikeModuleController {
     async update(id, updateStatusDto) {
         return this.bikeService.update(id, updateStatusDto);
     }
-    async getInfo() {
-        return await this.bikeService.getInfo();
+    async getInfo(req) {
+        return await this.bikeService.getInfo(req.user);
     }
     async uploadFile(file) {
         const rez = await this.bikeService.cloudService(file);
@@ -94,8 +94,9 @@ __decorate([
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)("/info"),
+    __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [register_dto_1.UserIdFromReqDTO]),
     __metadata("design:returntype", Promise)
 ], BikeModuleController.prototype, "getInfo", null);
 __decorate([

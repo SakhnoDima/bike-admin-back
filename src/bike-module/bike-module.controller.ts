@@ -69,8 +69,8 @@ export class BikeModuleController {
 
   @UseGuards(JwtAuthGuard)
   @Get("/info")
-  async getInfo(): Promise<IRez> {
-    return await this.bikeService.getInfo();
+  async getInfo(@Req() req: UserIdFromReqDTO): Promise<IRez> {
+    return await this.bikeService.getInfo(req.user);
   }
 
   @UseGuards(JwtAuthGuard)

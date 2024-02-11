@@ -62,8 +62,9 @@ let BikeModuleService = class BikeModuleService {
         }
         return bikeForUpdating;
     }
-    async getInfo() {
+    async getInfo(userId) {
         const info = await this.bikeModel.aggregate([
+            { $match: { owner: userId } },
             {
                 $group: {
                     _id: "$status",

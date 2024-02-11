@@ -41,6 +41,6 @@ export declare class BikeModuleController {
         _id: import("mongoose").Types.ObjectId;
     }>>;
     update(id: string, updateStatusDto: UpdateStatusDto): Promise<Bike>;
-    getInfo(): Promise<IRez>;
+    getInfo(req: UserIdFromReqDTO): Promise<IRez>;
     uploadFile(file: Express.Multer.File): Promise<UploadPhotoDto>;
 }

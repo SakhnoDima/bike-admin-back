@@ -80,8 +80,10 @@ export class BikeModuleService {
 
   //? get info
 
-  async getInfo(): Promise<IRez> {
+  async getInfo(userId: { id: Schema.Types.ObjectId }): Promise<IRez> {
     const info = await this.bikeModel.aggregate([
+      { $match: { owner: userId } },
+
       {
         $group: {
           _id: "$status",
