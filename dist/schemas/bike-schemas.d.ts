@@ -39,6 +39,7 @@ export declare class Bike {
     description: string;
     status: string;
     owner: string;
+    photo: string;
 }
 export declare const BikesSchema: import("mongoose").Schema<Bike, import("mongoose").Model<Bike, any, any, any, import("mongoose").Document<unknown, any, Bike> & Bike & {
     _id: import("mongoose").Types.ObjectId;

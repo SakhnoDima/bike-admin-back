@@ -77,14 +77,27 @@ let BikeModuleService = class BikeModuleService {
         const rez = (0, statisticsCalculator_1.statisticsCalculator)(info);
         return rez;
     }
-    async cloudService(file) {
+    async cloudService(file, userId, id) {
+        let user;
         try {
-            const result = await cloudinary.uploader.upload(file.path, cloudinaryOptions_1.options);
-            return result.url;
+            const result = await cloudinary.uploader.upload(file.path, {
+                ...cloudinaryOptions_1.options,
+                folder: `bikes/${userId}`,
+            });
+            if (!result) {
+                (0, handleErrors_1.HttpErrors)(common_1.HttpStatus.INTERNAL_SERVER_ERROR, `Something went wrong try. Pleas try again letter.`);
+            }
+            user = await this.bikeModel.findByIdAndUpdate(id, {
+                photo: result.url,
+            }, { new: true });
+            if (!user) {
+                (0, handleErrors_1.HttpErrors)(common_1.HttpStatus.NOT_FOUND, `User with id ${id} not found`);
+            }
         }
         catch (error) {
             (0, handleErrors_1.HttpErrors)(common_1.HttpStatus.INTERNAL_SERVER_ERROR, error.message);
         }
+        return user;
     }
 };
 exports.BikeModuleService = BikeModuleService;

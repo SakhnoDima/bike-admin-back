@@ -58,6 +58,10 @@ __decorate([
     (0, mongoose_1.Prop)({ type: mongoose_2.SchemaTypes.ObjectId, require: true, ref: "user" }),
     __metadata("design:type", String)
 ], Bike.prototype, "owner", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: String, required: false }),
+    __metadata("design:type", String)
+], Bike.prototype, "photo", void 0);
 exports.Bike = Bike = __decorate([
     (0, mongoose_1.Schema)()
 ], Bike);

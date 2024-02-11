@@ -38,6 +38,9 @@ export class Bike {
 
   @Prop({ type: SchemaTypes.ObjectId, require: true, ref: "user" })
   owner: string;
+
+  @Prop({ type: String, required: false })
+  photo: string;
 }
 
 export const BikesSchema = SchemaFactory.createForClass(Bike);

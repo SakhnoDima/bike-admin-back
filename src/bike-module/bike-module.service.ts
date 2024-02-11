@@ -8,6 +8,7 @@ import { CreateBikeDto } from "./dto/create-bike-dto";
 import { HttpErrors } from "src/helpers/handleErrors";
 import { IRez, statisticsCalculator } from "src/helpers/statisticsCalculator";
 import { options } from "./constant/cloudinaryOptions";
+import { AddBikePhotoDto } from "./dto/add-bike-photo-dto";
 
 @Injectable()
 export class BikeModuleService {
@@ -99,12 +100,39 @@ export class BikeModuleService {
     return rez;
   }
 
-  async cloudService(file: Express.Multer.File): Promise<string> {
+  async cloudService(
+    file: Express.Multer.File,
+    userId: { id: Schema.Types.ObjectId },
+    id: Schema.Types.ObjectId
+  ): Promise<AddBikePhotoDto> {
+    let user;
     try {
-      const result = await cloudinary.uploader.upload(file.path, options);
-      return result.url;
+      const result = await cloudinary.uploader.upload(file.path, {
+        ...options,
+        folder: `bikes/${userId}`,
+      });
+
+      if (!result) {
+        HttpErrors(
+          HttpStatus.INTERNAL_SERVER_ERROR,
+          `Something went wrong try. Pleas try again letter.`
+        );
+      }
+
+      user = await this.bikeModel.findByIdAndUpdate(
+        id,
+        {
+          photo: result.url,
+        },
+        { new: true }
+      );
+
+      if (!user) {
+        HttpErrors(HttpStatus.NOT_FOUND, `User with id ${id} not found`);
+      }
     } catch (error) {
       HttpErrors(HttpStatus.INTERNAL_SERVER_ERROR, error.message);
     }
+    return user;
   }
 }

@@ -22,15 +22,15 @@
 /// <reference types="mongoose/types/utility" />
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
-/// <reference types="mongoose" />
 /// <reference types="mongoose/types/inferschematype" />
 import { BikeModuleService } from "./bike-module.service";
 import { CreateBikeDto } from "./dto/create-bike-dto";
 import { Bike } from "src/schemas/bike-schemas";
 import { UpdateStatusDto } from "./dto/update-status-dto";
 import { IRez } from "src/helpers/statisticsCalculator";
-import { UploadPhotoDto } from "./dto/uploadBikePhoto-dto";
+import { Schema } from "mongoose";
 import { UserIdFromReqDTO } from "src/auth/dto/register-dto";
+import { AddBikePhotoDto } from "./dto/add-bike-photo-dto";
 export declare class BikeModuleController {
     private readonly bikeService;
     constructor(bikeService: BikeModuleService);
@@ -42,5 +42,7 @@ export declare class BikeModuleController {
     }>>;
     update(id: string, updateStatusDto: UpdateStatusDto): Promise<Bike>;
     getInfo(req: UserIdFromReqDTO): Promise<IRez>;
-    uploadFile(file: Express.Multer.File): Promise<UploadPhotoDto>;
+    uploadFile(file: Express.Multer.File, req: UserIdFromReqDTO, body: {
+        id: Schema.Types.ObjectId;
+    }): Promise<AddBikePhotoDto>;
 }

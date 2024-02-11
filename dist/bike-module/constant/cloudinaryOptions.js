@@ -5,6 +5,5 @@ exports.options = {
     use_filename: true,
     unique_filename: false,
     overwrite: true,
-    folder: "bikes",
 };
 //# sourceMappingURL=cloudinaryOptions.js.map

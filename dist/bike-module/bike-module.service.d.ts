@@ -27,6 +27,7 @@ import { Model, Schema } from "mongoose";
 import { Bike } from "src/schemas/bike-schemas";
 import { CreateBikeDto } from "./dto/create-bike-dto";
 import { IRez } from "src/helpers/statisticsCalculator";
+import { AddBikePhotoDto } from "./dto/add-bike-photo-dto";
 export declare class BikeModuleService {
     private readonly bikeModel;
     constructor(bikeModel: Model<Bike>);
@@ -46,5 +47,7 @@ export declare class BikeModuleService {
     getInfo(userId: {
         id: Schema.Types.ObjectId;
     }): Promise<IRez>;
-    cloudService(file: Express.Multer.File): Promise<string>;
+    cloudService(file: Express.Multer.File, userId: {
+        id: Schema.Types.ObjectId;
+    }, id: Schema.Types.ObjectId): Promise<AddBikePhotoDto>;
 }

@@ -43,9 +43,8 @@ let BikeModuleController = class BikeModuleController {
     async getInfo(req) {
         return await this.bikeService.getInfo(req.user);
     }
-    async uploadFile(file) {
-        const rez = await this.bikeService.cloudService(file);
-        return { path: rez };
+    async uploadFile(file, req, body) {
+        return await this.bikeService.cloudService(file, req.user, body.id);
     }
 };
 exports.BikeModuleController = BikeModuleController;
@@ -108,8 +107,10 @@ __decorate([
         }),
     })),
     __param(0, (0, common_1.UploadedFile)()),
+    __param(1, (0, common_1.Req)()),
+    __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, register_dto_1.UserIdFromReqDTO, Object]),
     __metadata("design:returntype", Promise)
 ], BikeModuleController.prototype, "uploadFile", null);
 exports.BikeModuleController = BikeModuleController = __decorate([

@@ -26,6 +26,7 @@ import { UploadPhotoDto } from "./dto/uploadBikePhoto-dto";
 import { Schema } from "mongoose";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { UserIdFromReqDTO } from "src/auth/dto/register-dto";
+import { AddBikePhotoDto } from "./dto/add-bike-photo-dto";
 
 @Controller("bike")
 export class BikeModuleController {
@@ -83,9 +84,10 @@ export class BikeModuleController {
     })
   )
   async uploadFile(
-    @UploadedFile() file: Express.Multer.File
-  ): Promise<UploadPhotoDto> {
-    const rez = await this.bikeService.cloudService(file);
-    return { path: rez };
+    @UploadedFile() file: Express.Multer.File,
+    @Req() req: UserIdFromReqDTO,
+    @Body() body: { id: Schema.Types.ObjectId }
+  ): Promise<AddBikePhotoDto> {
+    return await this.bikeService.cloudService(file, req.user, body.id);
   }
 }

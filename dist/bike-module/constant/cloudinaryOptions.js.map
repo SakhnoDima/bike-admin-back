@@ -1,1 +1,1 @@
-{"version":3,"file":"cloudinaryOptions.js","sourceRoot":"","sources":["../../../src/bike-module/constant/cloudinaryOptions.ts"],"names":[],"mappings":";;;AAAa,QAAA,OAAO,GAAG;IACrB,YAAY,EAAE,IAAI;IAClB,eAAe,EAAE,KAAK;IACtB,SAAS,EAAE,IAAI;IACf,MAAM,EAAE,OAAO;CAChB,CAAC"}
+{"version":3,"file":"cloudinaryOptions.js","sourceRoot":"","sources":["../../../src/bike-module/constant/cloudinaryOptions.ts"],"names":[],"mappings":";;;AAAa,QAAA,OAAO,GAAG;IACrB,YAAY,EAAE,IAAI;IAClB,eAAe,EAAE,KAAK;IACtB,SAAS,EAAE,IAAI;CAChB,CAAC"}

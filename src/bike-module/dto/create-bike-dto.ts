@@ -9,6 +9,8 @@ import { bikeType } from "../constant/constants";
 import { Schema } from "mongoose";
 
 export class CreateBikeDto {
+  readonly _id: Object;
+  readonly owner: Schema.Types.ObjectId;
   @IsNotEmpty()
   @IsString()
   @MinLength(5)
@@ -37,10 +39,6 @@ export class CreateBikeDto {
   @MinLength(5)
   readonly id: string;
 
-  readonly _id: Object;
-
   @IsString()
   readonly description: string;
-
-  readonly owner: Schema.Types.ObjectId;
 }
